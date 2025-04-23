@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haiqbal <haiqbal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hanfas <hanfas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 15:57:34 by haiqbal           #+#    #+#             */
-/*   Updated: 2025/04/14 16:29:57 by haiqbal          ###   ########.fr       */
+/*   Updated: 2025/04/21 20:35:27 by hanfas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <limits.h>
+# include <sys/time.h>
+
+typedef struct s_philo	t_philo;
 
 typedef struct s_table
 {
@@ -30,8 +33,11 @@ typedef struct s_table
 	int					*forks;
 	t_philo				*philos;
 	pthread_mutex_t		*fork_lock;
-	pthread_mutex_t		*eat_lock;
-	pthread_mutex_t		*death_lock;
+	pthread_mutex_t		write_lock;
+	pthread_mutex_t		eat_lock;
+	pthread_mutex_t		death_lock;
+	pthread_t			monitor;
+	ssize_t				start_time;
 }	t_table;
 
 typedef struct s_philo
@@ -40,12 +46,20 @@ typedef struct s_philo
 	unsigned long long	n_ate;
 	unsigned long long	last_ate;
 	pthread_t			thread;
-	int					*dead;
-	pthread_mutex_t		left_fork;
-	pthread_mutex_t		right_fork;
+	bool				dead;
+	int					left_fork;
+	int					right_fork;
+	t_table				sh_info;
 }	t_philo;
 
-//utils
+//utilities
 long long	ft_atoll(const char *str);
+
+//initialisations
+bool	initialisation(t_table table, int ac, char **av);
+bool	table_init(t_table table, int ac, char **av);
+bool	philos_init(t_table table);
+int		forkies(t_table	table);
+int		mutex_init(t_table	table);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haiqbal <haiqbal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hanfas <hanfas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 19:48:30 by haiqbal           #+#    #+#             */
-/*   Updated: 2025/04/14 15:57:39 by haiqbal          ###   ########.fr       */
+/*   Updated: 2025/04/22 21:24:16 by hanfas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ int	main(int ac, char **av)
 	if (ac != 5 || ac != 6)
 		return (write(2, "Error: invalid number of arguments", 34), 1);
 	if (!check_args(ac, av))
-		return (write(2, "Error: invalid number of arguments", 34), 1);
-	initialization(table, ac, av);
+		return (write(2, "Error: invalid arguments", 25), 1);
+	if (!initialisation(table, ac, av))
+		return (1);
+	// if (table.n_eat && table.n_eat == 0)
+	// 	return (0);
 }
