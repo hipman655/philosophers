@@ -6,7 +6,7 @@
 /*   By: hanfas <hanfas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 15:58:02 by haiqbal           #+#    #+#             */
-/*   Updated: 2025/04/23 13:50:36 by hanfas           ###   ########.fr       */
+/*   Updated: 2025/04/23 14:32:37 by hanfas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ bool	table_init(t_table table, int ac, char **av)
 		return (printf("Error: Malloc fail\n"), false);
 	if (!mutex_init(table))
 		return (false);
-	table.start_time = getitimer();
+	table.start_time = get_time();
 	return (true);
 }
 
