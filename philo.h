@@ -6,7 +6,7 @@
 /*   By: hanfas <hanfas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 15:57:34 by haiqbal           #+#    #+#             */
-/*   Updated: 2025/04/21 20:35:27 by hanfas           ###   ########.fr       */
+/*   Updated: 2025/04/24 17:03:16 by hanfas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,18 @@ typedef struct s_philo
 	bool				dead;
 	int					left_fork;
 	int					right_fork;
-	t_table				sh_info;
+	t_table				*sh_info;
 }	t_philo;
 
 //utilities
-long long	ft_atoll(const char *str);
+long long		ft_atoll(const char *str);
+unsigned long	get_time(void);
 
 //initialisations
-bool	initialisation(t_table table, int ac, char **av);
-bool	table_init(t_table table, int ac, char **av);
-bool	philos_init(t_table table);
-int		forkies(t_table	table);
-int		mutex_init(t_table	table);
+bool	initialisation(t_table *table, int ac, char **av);
+bool	table_init(t_table *table, int ac, char **av);
+bool	philos_init(t_table *table);
+int		forkies(t_table	*table);
+int		mutex_init(t_table	*table);
 
 #endif

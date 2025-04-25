@@ -6,7 +6,7 @@
 /*   By: hanfas <hanfas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 15:37:17 by haiqbal           #+#    #+#             */
-/*   Updated: 2025/04/23 13:54:38 by hanfas           ###   ########.fr       */
+/*   Updated: 2025/04/23 15:20:08 by hanfas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,10 @@ long long	ft_atoll(const char *str)
 	return (nb);
 }
 
+unsigned long	get_time(void)
+{
+	struct timeval time;
 
+	gettimeofday(&time, NULL);
+	return (time.tv_sec * 1000 + time.tv_usec / 1000);
+}
