@@ -6,7 +6,7 @@
 /*   By: hanfas <hanfas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 15:58:02 by haiqbal           #+#    #+#             */
-/*   Updated: 2025/04/24 17:31:06 by hanfas           ###   ########.fr       */
+/*   Updated: 2025/04/26 19:55:52 by hanfas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 bool	table_init(t_table *table, int ac, char **av)
 {
 	table->n_philo = ft_atoll(av[1]);
+	// printf("%lld\n", ft_atoll(av[1]));
 	table->die_time = ft_atoll(av[2]);
 	table->eat_time = ft_atoll(av[3]);
 	table->sleep_time = ft_atoll(av[4]);
@@ -32,7 +33,7 @@ bool	table_init(t_table *table, int ac, char **av)
 	if (!table->philos)
 		return (printf("Error: Malloc fail\n"), false);
 	if (!mutex_init(table))
-		return (false);
+		return (free_data(&table, 0), false);
 	table->start_time = get_time();
 	return (true);
 }
@@ -95,7 +96,9 @@ bool	initialisation(t_table *table, int ac, char **av)
 {
 	if (!table_init(table, ac, av))
 		return (false);
+	if (ac == 6 && table->n_eat == 0)
+		return (true);
 	if (!philos_init(table))
-		return (false);
+		return (free_data(&table, 0), false);
 	return (true);
 }

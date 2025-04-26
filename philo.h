@@ -6,7 +6,7 @@
 /*   By: hanfas <hanfas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 15:57:34 by haiqbal           #+#    #+#             */
-/*   Updated: 2025/04/24 17:03:16 by hanfas           ###   ########.fr       */
+/*   Updated: 2025/04/25 17:17:30 by hanfas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct s_table
 	pthread_mutex_t		write_lock;
 	pthread_mutex_t		eat_lock;
 	pthread_mutex_t		death_lock;
-	pthread_t			monitor;
+	pthread_t			waiter;
 	ssize_t				start_time;
 }	t_table;
 
