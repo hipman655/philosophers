@@ -6,7 +6,7 @@
 /*   By: haiqbal <haiqbal@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 19:48:30 by haiqbal           #+#    #+#             */
-/*   Updated: 2025/04/30 15:12:04 by haiqbal          ###   ########.fr       */
+/*   Updated: 2025/05/04 20:57:19 by haiqbal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	main(int ac, char **av)
 		return (1);
 	if (table.n_eat == 0)
 		return (0);
-	if (!thread_init(&table))
+	if (!threads_init(&table))
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: haiqbal <haiqbal@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 15:37:17 by haiqbal           #+#    #+#             */
-/*   Updated: 2025/04/30 15:12:34 by haiqbal          ###   ########.fr       */
+/*   Updated: 2025/05/07 17:57:24 by haiqbal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,17 @@ unsigned long	get_time(void)
 
 	gettimeofday(&time, NULL);
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
+}
+
+int	my_usleep(unsigned long long time, t_philo *philo)
+{
+	const unsigned long long	start = get_time();
+
+	while (get_time() < (start + time))
+	{
+		if (dead_check(philo->sh_info))
+			return (1);
+		usleep(500);
+	}
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: haiqbal <haiqbal@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 15:57:34 by haiqbal           #+#    #+#             */
-/*   Updated: 2025/04/30 15:12:27 by haiqbal          ###   ########.fr       */
+/*   Updated: 2025/05/06 19:55:45 by haiqbal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_table
 	pthread_mutex_t		write_lock;
 	pthread_mutex_t		eat_lock;
 	pthread_mutex_t		death_lock;
+	bool				dead;
 	pthread_t			waiter;
 	ssize_t				start_time;
 }	t_table;
@@ -46,7 +47,6 @@ typedef struct s_philo
 	unsigned long long	n_ate;
 	unsigned long long	last_ate;
 	pthread_t			thread;
-	bool				dead;
 	int					left_fork;
 	int					right_fork;
 	t_table				*sh_info;

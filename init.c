@@ -6,7 +6,7 @@
 /*   By: haiqbal <haiqbal@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 15:58:02 by haiqbal           #+#    #+#             */
-/*   Updated: 2025/04/30 15:11:51 by haiqbal          ###   ########.fr       */
+/*   Updated: 2025/05/06 19:56:34 by haiqbal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ bool	table_init(t_table *table, int ac, char **av)
 	if (!mutex_init(table))
 		return (free_data(&table, 0), false);
 	table->start_time = get_time();
+	table->dead = false;
 	return (true);
 }
 
@@ -83,7 +84,6 @@ bool	philos_init(t_table *table)
 		table->philos[i].id = i + 1;
 		table->philos[i].n_ate = 0;
 		table->philos[i].last_ate = table->start_time;
-		table->philos[i].dead = false;
 		table->philos[i].left_fork = i;
 		table->philos[i].right_fork = (i + 1) % table->n_philo;
 		table->philos[i].sh_info = table;
