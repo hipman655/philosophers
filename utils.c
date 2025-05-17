@@ -6,7 +6,7 @@
 /*   By: haiqbal <haiqbal@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 15:37:17 by haiqbal           #+#    #+#             */
-/*   Updated: 2025/05/07 17:57:24 by haiqbal          ###   ########.fr       */
+/*   Updated: 2025/05/17 17:45:22 by haiqbal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,31 @@ int	my_usleep(unsigned long long time, t_philo *philo)
 	while (get_time() < (start + time))
 	{
 		if (dead_check(philo->sh_info))
-			return (1);
+			return (0);
 		usleep(500);
 	}
-	return (0);
+	return (1);
+}
+
+int	print_action(t_table *table, int id, int status)
+{
+	pthread_mutex_lock(&table->write_lock);
+	if (status == DEAD)
+		printf("%llu %d died", get_time() - table->start_time, id);
+	if (dead_check(table))
+		return(pthread_mutex_unlock(&table->write_lock), 0);
+	if (!dead_check(table))
+	{
+		printf("%llu %d", get_time() - table->start_time, id);
+		if (status == EAT)
+			printf("is eating");
+		else if (status == SLEEP)
+			printf("is sleeping");
+		else if (status == THINK)
+			printf("is thinking");
+		else if (status == FORK)
+			printf("has taken a fork");
+	}
+	pthread_mutex_unlock(&table->write_lock);
+	return (1);
 }

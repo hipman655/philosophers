@@ -6,7 +6,7 @@
 /*   By: haiqbal <haiqbal@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 20:08:03 by haiqbal           #+#    #+#             */
-/*   Updated: 2025/05/07 18:00:16 by haiqbal          ###   ########.fr       */
+/*   Updated: 2025/05/17 17:05:09 by haiqbal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	fork_avail_check(t_philo *philo, int first, int second)
 	ftwo = philo->sh_info->forks[second];
 	pthread_mutex_unlock(&philo->sh_info->fork_lock[second]);
 	if (fone != philo->sh_info->forks[first] || ftwo != philo->sh_info->forks[second])
-	return (0);
+		   return (0);
 	return (1);
 }
 

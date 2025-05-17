@@ -6,7 +6,7 @@
 /*   By: haiqbal <haiqbal@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 15:57:34 by haiqbal           #+#    #+#             */
-/*   Updated: 2025/05/06 19:55:45 by haiqbal          ###   ########.fr       */
+/*   Updated: 2025/05/11 16:03:05 by haiqbal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@
 # include <stdio.h>
 # include <limits.h>
 # include <sys/time.h>
+
+# define EAT 0
+# define SLEEP 1
+# define THINK 2
+# define FORK 3
+# define DEAD 4
 
 typedef struct s_philo	t_philo;
 

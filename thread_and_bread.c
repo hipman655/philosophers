@@ -6,7 +6,7 @@
 /*   By: haiqbal <haiqbal@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 15:11:13 by haiqbal           #+#    #+#             */
-/*   Updated: 2025/05/07 18:02:46 by haiqbal          ###   ########.fr       */
+/*   Updated: 2025/05/11 15:36:01 by haiqbal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	action(void *arg)
 	if (philo->sh_info->n_philo == 1)
 	{
 		kill_philo(&philo);
-		return (1);
+		return (NULL);
 	}
 	while (!dead_check)
 	{
@@ -60,6 +60,7 @@ void	action(void *arg)
 				return (NULL);
 		}
 	}
+	return (NULL);
 }
 
 int	threads_init(t_table *table)
@@ -69,7 +70,10 @@ int	threads_init(t_table *table)
 	i = 0;
 	while (i < table->n_philo)
 	{
-		if (!pthread_create(&table->philos[i].thread, NULL, &action, &table->philos[i]))
-			return (1);
+		if (pthread_create(&table->philos[i].thread, NULL, &action, &table->philos[i]))
+			return (printf("Error: pthread_create failed\n", 1));
+		i++;
 	}
+	if (table->n_philo > 1 && pthread_create(&table->waiter, NULL, &action, &table->philos[i]))
+			return (printf("Error: pthread_create failed\n", 1));
 }
