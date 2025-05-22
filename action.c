@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   action.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haiqbal <haiqbal@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: haiqbal <haiqbal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/11 15:38:29 by haiqbal           #+#    #+#             */
-/*   Updated: 2025/05/18 18:27:34 by haiqbal          ###   ########.fr       */
+/*   Created: 2025/05/22 19:11:25 by haiqbal           #+#    #+#             */
+/*   Updated: 2025/05/22 19:26:56 by haiqbal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	eat(t_philo *philo)
 {
 	int	first;
 	int	second;
-	
+
 	fork_assign(philo, &first, &second);
 	if (!print_action(philo->sh_info, philo->id, FORK))
 		return (0);
@@ -32,11 +32,11 @@ int	eat(t_philo *philo)
 	pthread_mutex_unlock(&philo->sh_info->eat_lock);
 	philo->sh_info->forks[philo->left_fork] = philo->id;
 	philo->sh_info->forks[philo->right_fork] = philo->id;
-	unlock_fork(philo, first, second);
+	unlock_forks(philo, first, second);
 	return (1);
 }
 
-int	sleep(t_philo *philo)
+int	slleep(t_philo *philo)
 {
 	if (!print_action(philo->sh_info, philo->id, SLEEP))
 		return (0);
@@ -45,7 +45,7 @@ int	sleep(t_philo *philo)
 	return (1);
 }
 
-int think(t_philo *philo)
+int	think(t_philo *philo)
 {
 	if (!print_action(philo->sh_info, philo->id, THINK))
 		return (0);

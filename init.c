@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haiqbal <haiqbal@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: haiqbal <haiqbal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 15:58:02 by haiqbal           #+#    #+#             */
-/*   Updated: 2025/05/06 19:56:34 by haiqbal          ###   ########.fr       */
+/*   Updated: 2025/05/22 19:26:10 by haiqbal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 bool	table_init(t_table *table, int ac, char **av)
 {
 	table->n_philo = ft_atoll(av[1]);
-	// printf("%lld\n", ft_atoll(av[1]));
 	table->die_time = ft_atoll(av[2]);
 	table->eat_time = ft_atoll(av[3]);
 	table->sleep_time = ft_atoll(av[4]);
@@ -33,7 +32,7 @@ bool	table_init(t_table *table, int ac, char **av)
 	if (!table->philos)
 		return (printf("Error: Malloc fail\n"), false);
 	if (!mutex_init(table))
-		return (free_data(&table, 0), false);
+		return (free_data(table, 0), false);
 	table->start_time = get_time();
 	table->dead = false;
 	return (true);
@@ -99,6 +98,6 @@ bool	initialisation(t_table *table, int ac, char **av)
 	if (ac == 6 && table->n_eat == 0)
 		return (true);
 	if (!philos_init(table))
-		return (free_data(&table, 0), false);
+		return (free_data(table, 0), false);
 	return (true);
 }

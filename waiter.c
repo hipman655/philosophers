@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   waiter.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haiqbal <haiqbal@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: haiqbal <haiqbal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 18:50:28 by haiqbal           #+#    #+#             */
-/*   Updated: 2025/05/19 18:29:01 by haiqbal          ###   ########.fr       */
+/*   Updated: 2025/05/22 19:15:18 by haiqbal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	end_eat(t_table *table)
 	pthread_mutex_unlock(&table->death_lock);
 	pthread_mutex_unlock(&table->eat_lock);
 }
+
 void	philo_death(t_table *table, int i)
 {
 	pthread_mutex_lock(&table->death_lock);

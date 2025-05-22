@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haiqbal <haiqbal@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: haiqbal <haiqbal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 15:37:17 by haiqbal           #+#    #+#             */
-/*   Updated: 2025/05/17 17:45:22 by haiqbal          ###   ########.fr       */
+/*   Updated: 2025/05/22 19:20:20 by haiqbal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ long long	ft_atoll(const char *str)
 	return (nb);
 }
 
-unsigned long	get_time(void)
+unsigned long long	get_time(void)
 {
-	struct timeval time;
+	struct timeval	time;
 
 	gettimeofday(&time, NULL);
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
@@ -60,7 +60,7 @@ int	print_action(t_table *table, int id, int status)
 	if (status == DEAD)
 		printf("%llu %d died", get_time() - table->start_time, id);
 	if (dead_check(table))
-		return(pthread_mutex_unlock(&table->write_lock), 0);
+		return (pthread_mutex_unlock(&table->write_lock), 0);
 	if (!dead_check(table))
 	{
 		printf("%llu %d", get_time() - table->start_time, id);
