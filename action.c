@@ -6,7 +6,7 @@
 /*   By: haiqbal <haiqbal@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 15:38:29 by haiqbal           #+#    #+#             */
-/*   Updated: 2025/05/17 18:19:02 by haiqbal          ###   ########.fr       */
+/*   Updated: 2025/05/18 18:27:34 by haiqbal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,18 @@ int	eat(t_philo *philo)
 	return (1);
 }
 
+int	sleep(t_philo *philo)
+{
+	if (!print_action(philo->sh_info, philo->id, SLEEP))
+		return (0);
+	if (!my_usleep(philo->sh_info->sleep_time, philo))
+		return (0);
+	return (1);
+}
 
+int think(t_philo *philo)
+{
+	if (!print_action(philo->sh_info, philo->id, THINK))
+		return (0);
+	return (1);
+}

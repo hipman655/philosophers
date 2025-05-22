@@ -6,7 +6,7 @@
 /*   By: haiqbal <haiqbal@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 15:57:34 by haiqbal           #+#    #+#             */
-/*   Updated: 2025/05/11 16:03:05 by haiqbal          ###   ########.fr       */
+/*   Updated: 2025/05/19 18:36:04 by haiqbal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ typedef struct s_philo
 //utilities
 long long		ft_atoll(const char *str);
 unsigned long	get_time(void);
+int				my_usleep(unsigned long long time, t_philo *philo);
+int				print_action(t_table *table, int id, int status);
 
 //initialisations
 bool	initialisation(t_table *table, int ac, char **av);
@@ -68,5 +70,32 @@ bool	table_init(t_table *table, int ac, char **av);
 bool	philos_init(t_table *table);
 int		forkies(t_table	*table);
 int		mutex_init(t_table	*table);
+
+//memory free
+void	free_data(t_table *table, int i);
+void	destroy_mutex(t_table *table);
+
+//fork utilities
+void	fork_assign(t_philo *philo, int *first, int *second);
+int		fork_avail_check(t_philo *philo, int first, int second);
+void	lock_forks(t_philo *philo, int first, int second);
+void	unlock_forks(t_philo *philo, int first, int second);
+
+//thread initialisation
+int		threads_init(t_table *table);
+void	action(void *arg);
+void	kill_philo(t_philo *philo);
+int		dead_check(t_table *sh_info);
+
+//philosopher actions
+int	eat(t_philo *philo);
+int	sleep(t_philo *philo);
+int think(t_philo *philo);
+
+//waiter functions
+void	*waiter_action(void *arg);
+int		eat_check(t_table *table);
+void	end_eat(t_table *table);
+void	philo_death(t_table *table, int i);
 
 #endif

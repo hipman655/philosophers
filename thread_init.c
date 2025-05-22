@@ -6,7 +6,7 @@
 /*   By: haiqbal <haiqbal@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 15:11:13 by haiqbal           #+#    #+#             */
-/*   Updated: 2025/05/11 15:36:01 by haiqbal          ###   ########.fr       */
+/*   Updated: 2025/05/19 10:50:40 by haiqbal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,16 @@ int	threads_init(t_table *table)
 			return (printf("Error: pthread_create failed\n", 1));
 		i++;
 	}
-	if (table->n_philo > 1 && pthread_create(&table->waiter, NULL, &action, &table->philos[i]))
+	if (table->n_philo > 1 && pthread_create(&table->waiter, NULL, &waiter_action, table))
 			return (printf("Error: pthread_create failed\n", 1));
+	if (table->n_philo > 1 && pthread_join(table->waiter, NULL))
+		return (printf("Error: pthread_join failed\n"), 1);
+	i = 0;
+	while (i < table->n_philo)
+	{
+		if (pthread_join(table->philos[i].thread, NULL))
+			return (printf("Error: pthread_join failed\n"), 1);
+		i++;
+	}
+	return (0);
 }
