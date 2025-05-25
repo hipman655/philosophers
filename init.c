@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haiqbal <haiqbal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: haiqbal <haiqbal@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 15:58:02 by haiqbal           #+#    #+#             */
-/*   Updated: 2025/05/22 19:26:10 by haiqbal          ###   ########.fr       */
+/*   Updated: 2025/05/25 17:27:26 by haiqbal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ bool	table_init(t_table *table, int ac, char **av)
 	table->die_time = ft_atoll(av[2]);
 	table->eat_time = ft_atoll(av[3]);
 	table->sleep_time = ft_atoll(av[4]);
+	table->n_eat = -1;
 	if (ac == 6)
 		table->n_eat = ft_atoll(av[5]);
 	if (table->n_philo >= INT_MAX || table->eat_time >= INT_MAX
@@ -30,10 +31,12 @@ bool	table_init(t_table *table, int ac, char **av)
 		return (false);
 	table->philos = malloc(sizeof(t_philo) * table->n_philo);
 	if (!table->philos)
-		return (printf("Error: Malloc fail\n"), false);
+		return (free(table->forks), printf("Error: Malloc fail\n"), false);
 	if (!mutex_init(table))
 		return (free_data(table, 0), false);
 	table->start_time = get_time();
+	if (table->start_time == -1)
+		return (1);
 	table->dead = false;
 	return (true);
 }
@@ -48,7 +51,12 @@ int	forkies(t_table	*table)
 		return (printf("Error: Malloc fail\n"), 0);
 	while (i < table->n_philo)
 	{
-		table->forks[i] = i;
+		if (i == 0 || i == table->n_philo - 1)
+			table->forks[i] = table->n_philo;
+		else if (i % 2 == 0)
+			table->forks[i] = i + 2;
+		else
+			table->forks[i] = i + 1;
 		i++;
 	}
 	return (1);

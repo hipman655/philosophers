@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   thread_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haiqbal <haiqbal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: haiqbal <haiqbal@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 15:11:13 by haiqbal           #+#    #+#             */
-/*   Updated: 2025/05/22 19:33:17 by haiqbal          ###   ########.fr       */
+/*   Updated: 2025/05/25 11:18:24 by haiqbal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	kill_philo(t_philo *philo)
 	pthread_mutex_lock(&philo->sh_info->death_lock);
 	philo->sh_info->dead = true;
 	pthread_mutex_unlock(&philo->sh_info->death_lock);
+	print_action(philo->sh_info, philo->id, DEAD);
 }
 
 void	*action(void *arg)
@@ -72,20 +73,20 @@ int	threads_init(t_table *table)
 	{
 		if (pthread_create(&table->philos[i].thread, NULL,
 				&action, &table->philos[i]))
-			return (printf("Error: pthread_create failed\n"), 1);
+			return (printf("Error: pthread_create failed\n"), 0);
 		i++;
 	}
 	if (table->n_philo > 1 && pthread_create(&table->waiter, NULL,
 			&waiter_action, table))
-		return (printf("Error: pthread_create failed\n"), 1);
+		return (printf("Error: pthread_create failed\n"), 0);
 	if (table->n_philo > 1 && pthread_join(table->waiter, NULL))
-		return (printf("Error: pthread_join failed\n"), 1);
+		return (printf("Error: pthread_join failed\n"), 0);
 	i = 0;
 	while (i < table->n_philo)
 	{
 		if (pthread_join(table->philos[i].thread, NULL))
-			return (printf("Error: pthread_join failed\n"), 1);
+			return (printf("Error: pthread_join failed\n"), 0);
 		i++;
 	}
-	return (0);
+	return (1);
 }

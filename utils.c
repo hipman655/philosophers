@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haiqbal <haiqbal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: haiqbal <haiqbal@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 15:37:17 by haiqbal           #+#    #+#             */
-/*   Updated: 2025/05/22 19:20:20 by haiqbal          ###   ########.fr       */
+/*   Updated: 2025/05/25 17:23:32 by haiqbal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,20 +58,20 @@ int	print_action(t_table *table, int id, int status)
 {
 	pthread_mutex_lock(&table->write_lock);
 	if (status == DEAD)
-		printf("%llu %d died", get_time() - table->start_time, id);
+		printf("%llu %d died\n", get_time() - table->start_time, id);
 	if (dead_check(table))
 		return (pthread_mutex_unlock(&table->write_lock), 0);
 	if (!dead_check(table))
 	{
-		printf("%llu %d", get_time() - table->start_time, id);
+		printf("%llu %d ", get_time() - table->start_time, id);
 		if (status == EAT)
-			printf("is eating");
+			printf("is eating\n");
 		else if (status == SLEEP)
-			printf("is sleeping");
+			printf("is sleeping\n");
 		else if (status == THINK)
-			printf("is thinking");
+			printf("is thinking\n");
 		else if (status == FORK)
-			printf("has taken a fork");
+			printf("has taken a fork\n");
 	}
 	pthread_mutex_unlock(&table->write_lock);
 	return (1);

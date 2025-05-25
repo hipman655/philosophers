@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fork_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haiqbal <haiqbal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: haiqbal <haiqbal@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 20:08:03 by haiqbal           #+#    #+#             */
-/*   Updated: 2025/05/22 19:12:32 by haiqbal          ###   ########.fr       */
+/*   Updated: 2025/05/25 11:16:22 by haiqbal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ int	fork_avail_check(t_philo *philo, int first, int second)
 	pthread_mutex_lock(&philo->sh_info->fork_lock[second]);
 	ftwo = philo->sh_info->forks[second];
 	pthread_mutex_unlock(&philo->sh_info->fork_lock[second]);
-	if (fone != philo->sh_info->forks[first]
-		|| ftwo != philo->sh_info->forks[second])
+	if (fone != philo->id && ftwo != philo->id)
 		return (0);
 	return (1);
 }
